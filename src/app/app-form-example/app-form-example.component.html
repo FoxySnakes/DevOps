@@ -9,6 +9,15 @@
     </div>
   </div>
 
+  <div>
+    <label>Prénom :</label>
+    <input formControlName="prenom" maxlength="15" />
+    <div *ngIf="myForm.get('prenom')?.invalid && myForm.get('prenom')?.touched">
+      <small *ngIf="myForm.get('prenom')?.errors?.['required']">Prénom requis.</small>
+      <small *ngIf="myForm.get('prenom')?.errors?.['maxLength']">Max 15 caractères.</small>
+    </div>
+  </div>
+
 
 
   <button type="submit" [disabled]="myForm.invalid">Envoyer</button>
