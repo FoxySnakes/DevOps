@@ -18,7 +18,15 @@
     </div>
   </div>
 
-
+  <div>
+    <label>Matricule :</label>
+    <input formControlName="matricule" maxlength="5" />
+    <div *ngIf="myForm.get('matricule')?.invalid && myForm.get('matricule')?.touched">
+      <small *ngIf="myForm.get('matricule')?.errors?.['required']">Matricule requis.</small>
+      <small *ngIf="myForm.get('matricule')?.errors?.['pattern']">Doit être un nombre.</small>
+      <small *ngIf="myForm.get('matricule')?.errors?.['max']">Max 99999.</small>
+    </div>
+  </div>
 
   <button type="submit" [disabled]="myForm.invalid">Envoyer</button>
 </form>
