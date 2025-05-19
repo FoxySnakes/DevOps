@@ -1,0 +1,15 @@
+<!-- form-example.component.html -->
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Nom :</label>
+    <input formControlName="nom" maxlength="15" />
+    <div *ngIf="myForm.get('nom')?.invalid && myForm.get('nom')?.touched">
+      <small *ngIf="myForm.get('nom')?.errors?.['required']">Nom requis.</small>
+      <small *ngIf="myForm.get('nom')?.errors?.['maxLength']">Max 15 caractères.</small>
+    </div>
+  </div>
+
+
+
+  <button type="submit" [disabled]="myForm.invalid">Envoyer</button>
+</form>

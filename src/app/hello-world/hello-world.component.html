@@ -1,0 +1,10 @@
+<div class="universe" (mousemove)="onPointerMove($event)">
+  <!-- WebGL renderer -->
+  <canvas #rendererCanvas class="webgl"></canvas>
+
+  <!-- Overlay titre + effets CRT -->
+  <div class="overlay">
+    <h1 class="glitch" data-text="HELLO WORLD">HELLO&nbsp;WORLD</h1>
+    <div class="crt-lines"></div>
+  </div>
+</div>

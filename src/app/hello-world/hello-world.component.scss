@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+// ---------- variables ----------
+$scanColor: rgba(255,255,255,0.06);
+$neon: #0ff;
+
+// ---------- scène & canvas ----------
+.universe {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+.webgl {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+// ---------- overlay ----------
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+// ---------- titre glitch néon ----------
+.glitch {
+  position: relative;
+  font-family: 'Russo One', sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  letter-spacing: .08em;
+  color: transparent;
+  background: linear-gradient(90deg, #fff, $neon, #fff) 0 0 / 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 5s linear infinite alternate;
+  text-shadow:
+    0 0 4px $neon,
+    0 0 16px $neon,
+    0 0 32px $neon;
+
+  /* double couche glitch */
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: screen;
+    animation: glitchShift 1.5s steps(18) infinite;
+  }
+  &::before { color: #f0f;  left: 2px; top: -2px; }
+  &::after  { color: #0ff;  left: -2px; top: 2px;  }
+}
+
+// ---------- lignes CRT + balayage ----------
+.crt-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    $scanColor 0 2px,
+    transparent 2px 6px
+  );
+  animation: scan 8s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+// ---------- keyframes ----------
+@keyframes shine {
+  0%   { background-position:   0% center; }
+  100% { background-position: -200% center; }
+}
+@keyframes glitchShift {
+  0%  { clip-path: inset(20% 0 60% 0); }
+  20% { clip-path: inset(40% 0 40% 0); }
+  40% { clip-path: inset(60% 0 20% 0); }
+  60% { clip-path: inset(80% 0  0  0); }
+  80% { clip-path: inset(40% 0 40% 0); }
+  100%{ clip-path: inset(20% 0 60% 0); }
+}
+@keyframes scan {
+  0%   { background-position-y: 0; }
+  100% { background-position-y: 6px; }
+}
